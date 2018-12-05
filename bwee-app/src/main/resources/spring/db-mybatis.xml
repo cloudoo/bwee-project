@@ -38,33 +38,33 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
-        <property name="typeAliasesPackage" value="${type.aliases.package:com.csair}" />
+        <property name="typeAliasesPackage" value="${type.aliases.package:com.cloudo}" />
         <!-- 显式指定Mapper文件位置 -->
         <property name="mapperLocations" value="classpath*:/mapper/*.xml" />
-        <property name="typeHandlersPackage"
-            value="${type.handlers.package:com.csair.diamond.repository.mybatis.handler}" />
-        <property name="plugins">
-            <list>
-                <ref bean="mybatisSqlInjectionHandlerInterceptor" />
-                <ref bean="mybatisStatementHandlerInterceptor" />
-                <ref bean="mybatisResultSetHandlerInterceptor" />
-            </list>
-        </property>
+        <!--<property name="typeHandlersPackage"-->
+            <!--value="${type.handlers.package:com.csair.diamond.repository.mybatis.handler}" />-->
+        <!--<property name="plugins">-->
+            <!--<list>-->
+                <!--<ref bean="mybatisSqlInjectionHandlerInterceptor" />-->
+                <!--<ref bean="mybatisStatementHandlerInterceptor" />-->
+                <!--<ref bean="mybatisResultSetHandlerInterceptor" />-->
+            <!--</list>-->
+        <!--</property>-->
     </bean>
-    <bean id="mybatisStatementHandlerInterceptor" class="com.csair.diamond.repository.mybatis.interceptor.StatementHandlerInterceptor">
-        <property name="dialectClass" value="com.csair.diamond.repository.mybatis.MySqlDialect" />
-    </bean>
+    <!--<bean id="mybatisStatementHandlerInterceptor" class="com.csair.diamond.repository.mybatis.interceptor.StatementHandlerInterceptor">-->
+        <!--<property name="dialectClass" value="com.csair.diamond.repository.mybatis.MySqlDialect" />-->
+    <!--</bean>-->
 
-    <bean id="mybatisResultSetHandlerInterceptor" class="com.csair.diamond.repository.mybatis.interceptor.ResultSetHandlerInterceptor">
-    </bean>
+    <!--<bean id="mybatisResultSetHandlerInterceptor" class="com.csair.diamond.repository.mybatis.interceptor.ResultSetHandlerInterceptor">-->
+    <!--</bean>-->
 
-    <bean id="mybatisSqlInjectionHandlerInterceptor" class="com.csair.diamond.repository.mybatis.interceptor.SqlInjectionHandlerInterceptor">
-    </bean>
+    <!--<bean id="mybatisSqlInjectionHandlerInterceptor" class="com.csair.diamond.repository.mybatis.interceptor.SqlInjectionHandlerInterceptor">-->
+    <!--</bean>-->
 
     <!-- 扫描basePackage下所有以@Repository标识的 接口 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="${mapper.scanner.base.package:com.csair.r}" />
-        <property name="annotationClass" value="com.csair.diamond.repository.annotation.Repository" />
+        <property name="basePackage" value="${mapper.scanner.base.package:com.cloudo.bwee.dao}" />
+        <!--<property name="annotationClass" value="com.csair.diamond.repository.annotation.Repository" />-->
         <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>

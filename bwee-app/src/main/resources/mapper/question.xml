@@ -18,139 +18,23 @@
   <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from fr2_cloud_report
+    from BW_QUESTION
     where ID = #{id,jdbcType=BIGINT}
   </select>
   
   <delete id="delete" parameterType="java.lang.Long">
-    delete from fr2_cloud_report
+    delete from BW_QUESTION
     where ID = #{id,jdbcType=BIGINT}
   </delete>
 
-  <update id="updatePermissionType" parameterType="java.util.Map">
-    update fr2_cloud_report
-    set `PERMISSION_TYPE` = #{permissionType, jdbcType=TINYINT}
-    where `UUID` = #{dataResUuid,jdbcType=VARCHAR}
-  </update>
 
-  <insert id="insert" parameterType="com.csair.r.fr2.model.CloudReport" useGeneratedKeys="true" keyProperty="id">
-    insert into fr2_cloud_report (ID, NAME, REPORT_TYPE,
-      CREATE_ID, DATA_SET_ID, DATA_PATH, REPORT_DATE, CREATE_TIME, DISPLAY_ORDER,
-       POS_ROW, POS_COL, SIZE_X, SIZE_Y, UUID, PERMISSION_TYPE)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{reportType,jdbcType=INTEGER},
-      #{createId,jdbcType=BIGINT}, #{dataSetId,jdbcType=VARCHAR}, #{dataPath,jdbcType=VARCHAR},
-      #{reportDate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}, #{displayOrder,jdbcType=INTEGER},
-      #{posRow,jdbcType=INTEGER}, #{posCol,jdbcType=INTEGER}, #{sizeX,jdbcType=INTEGER},
-      #{sizeY,jdbcType=INTEGER}, #{uuid,jdbcType=VARCHAR}, #{permissionType,jdbcType=TINYINT})
+  <insert id="insert" parameterType="com.cloudo.bwee.domain.Question" useGeneratedKeys="true" keyProperty="id">
+    insert into BW_QUESTION (ID,  CONTENT, ERROR_COUNT, SOURCE, TYPE)
+    values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{errorCount,jdbcType=INTEGER},
+      #{source,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR})
   </insert>
 
-  <select id="findReportDateList" resultType="com.csair.r.fr2.model.data.CloudReportItem"
-          parameterType="java.util.Map">
-    select * from (
-      select
-	    r.`ID`   as `id`,
-	    r.`NAME` as `name`,
-	    u.`name` as `creator`,
-        r.`REPORT_TYPE` AS `reportType`,
-	    r.`REPORT_DATE` as `createDate`,
-        r.`UUID` as uuid,
-        r.`PERMISSION_TYPE` as permissionType,
-        DATE_FORMAT(r.`CREATE_TIME`, '%Y-%m-%d %H:%i:%s') as `createTime`
-      from fr2_cloud_report r
-      join fr2_user u on r.`CREATE_ID` = u.`id`
-      left join fr2_user_inst_role_map i on i.`user_uuid` = u.`uuid`
-      left join fr2_institution_role ir on ir.`uuid` = i.`inst_role_uuid`
-      where (r.`CREATE_ID` = #{userId, jdbcType=BIGINT}
-        or r.`PERMISSION_TYPE` = 1
-        or ( r.`PERMISSION_TYPE` = 0
-          and (ir.`status` != 2 or ir.`status` is null)
-          and r.`UUID` in (
-            select data_res_uuid
-            from fr2_data_res_info a
-            where a.`account_uuid` = #{userUuid, jdbcType=VARCHAR}
-            <if test="instRoleUuids != null">
-              or a.`inst_role_uuid` in
-              <foreach collection="instRoleUuids" item="uuid" open="(" close=")" separator=",">
-                #{uuid, jdbcType=VARCHAR}
-              </foreach>
-            </if>
-          )
-        )
-        or ( r.`PERMISSION_TYPE` = 2
-          and (ir.`status` != 2 or ir.`status` is null)
-          and r.`UUID` not in (
-            select data_res_uuid
-            from fr2_data_res_info a
-            where a.`account_uuid` = #{userUuid, jdbcType=VARCHAR}
-            <if test="instRoleUuids != null">
-              or a.`inst_role_uuid` in
-              <foreach collection="instRoleUuids" item="uuid" open="(" close=")" separator=",">
-                #{uuid, jdbcType=VARCHAR}
-              </foreach>
-            </if>
-          )
-        )
-      )
-      <if test="createDate != null">
-        and DATE_FORMAT(r.`REPORT_DATE`, '%Y-%m-%d') = #{createDate, jdbcType=VARCHAR}
-      </if>
-      <if test="dateFrom != null and dateTo != null">
-        and (r.`REPORT_DATE` <![CDATA[>=]]> #{dateFrom, jdbcType=TIMESTAMP}
-        and r.`REPORT_DATE` <![CDATA[<=]]> #{dateTo, jdbcType=TIMESTAMP})
-      </if>
-      order by r.`REPORT_DATE` desc, r.`CREATE_TIME` desc
-    ) t
-    <if test="fromRow != null and pageSize != null">
-      limit #{fromRow, jdbcType=INTEGER}, #{pageSize, jdbcType=INTEGER}
-    </if>
-  </select>
 
-  <select id="findReportDateListCount" resultType="java.lang.Integer"
-          parameterType="java.util.Map">
-    select
-      count(1)
-    from fr2_cloud_report r
-    join fr2_user u on r.`CREATE_ID` = u.`id`
-    left join fr2_user_inst_role_map i on i.`user_uuid` = u.`uuid`
-    left join fr2_institution_role ir on ir.`uuid` = i.`inst_role_uuid`
-    where (r.`CREATE_ID` = #{userId, jdbcType=BIGINT}
-      or r.`PERMISSION_TYPE` = 1
-      or ( r.`PERMISSION_TYPE` = 0
-        and (ir.`status` != 2 or ir.`status` is null)
-        and r.`UUID` in (
-          select data_res_uuid
-          from fr2_data_res_info a
-          where a.`account_uuid` = #{userUuid, jdbcType=VARCHAR}
-          <if test="instRoleUuids != null">
-            or a.`inst_role_uuid` in
-            <foreach collection="instRoleUuids" item="uuid" open="(" close=")" separator=",">
-              #{uuid, jdbcType=VARCHAR}
-            </foreach>
-          </if>
-        )
-      )
-      or ( r.`PERMISSION_TYPE` = 2
-        and (ir.`status` != 2 or ir.`status` is null)
-        and r.`UUID` not in (
-          select data_res_uuid
-          from fr2_data_res_info a
-          where a.`account_uuid` = #{userUuid, jdbcType=VARCHAR}
-          <if test="instRoleUuids != null">
-            or a.`inst_role_uuid` in
-            <foreach collection="instRoleUuids" item="uuid" open="(" close=")" separator=",">
-              #{uuid, jdbcType=VARCHAR}
-            </foreach>
-          </if>
-        )
-      )
-    )
-    <if test="createDate != null">
-      and DATE_FORMAT(r.`REPORT_DATE`, '%Y-%m-%d') = #{createDate, jdbcType=VARCHAR}
-    </if>
-    <if test="dateFrom != null and dateTo != null">
-      and (r.`REPORT_DATE` <![CDATA[>=]]> #{dateFrom, jdbcType=TIMESTAMP}
-      and r.`REPORT_DATE` <![CDATA[<=]]> #{dateTo, jdbcType=TIMESTAMP})
-    </if>
-  </select>
+
   
 </mapper>
