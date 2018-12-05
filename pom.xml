@@ -7,12 +7,15 @@
     <modules>
         <module>bwee-app</module>
         <module>bwee-web</module>
+        <module>bwee-domain</module>
     </modules>
     <groupId>com.cloudo.bwee</groupId>
     <artifactId>bwee-project</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <spring.version>4.3.10.RELEASE</spring.version>
+        <javassist_version>3.22.0-GA</javassist_version>
+        <druid.version>1.1.6</druid.version>
     </properties>
 
    <dependencyManagement>
@@ -20,6 +23,11 @@
            <dependency>
                <groupId>org.springframework</groupId>
                <artifactId>spring-beans</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-context</artifactId>
                <version>${spring.version}</version>
            </dependency>
            <dependency>
@@ -42,13 +50,21 @@
                <artifactId>mysql-connector-java</artifactId>
                <version>5.1.39</version>
            </dependency>
-
+           <dependency>
+               <groupId>org.springframework</groupId>
+               <artifactId>spring-jdbc</artifactId>
+               <version>${spring.version}</version>
+           </dependency>
            <dependency>
                <groupId>org.springframework</groupId>
                <artifactId>spring-test</artifactId>
                <version>${spring.version}</version>
            </dependency>
-
+           <dependency>
+               <groupId>com.alibaba</groupId>
+               <artifactId>druid</artifactId>
+               <version>${druid.version}</version>
+           </dependency>
        </dependencies>
    </dependencyManagement>
 
