@@ -29,10 +29,12 @@
 
 
   <insert id="insert" parameterType="com.cloudo.bwee.domain.Question" useGeneratedKeys="true" keyProperty="id">
-    insert into BW_QUESTION (ID,  CONTENT, ERROR_COUNT, SOURCE, TYPE)
-    values (#{id,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{errorCount,jdbcType=INTEGER},
+    insert into BW_QUESTION ( CONTENT, ERROR_COUNT, SOURCE, TYPE)
+    values (#{content,jdbcType=VARCHAR}, #{errorCount,jdbcType=INTEGER},
       #{source,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR})
   </insert>
+
+
 
 
 
