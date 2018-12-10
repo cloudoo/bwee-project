@@ -1,6 +1,7 @@
 package com.cloudo.bwee.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  *
@@ -9,14 +10,17 @@ import java.io.Serializable;
  */
 public class Question implements Serializable {
 
+    public static int SELE_TYPE= 1;//选择题
+    public static int FILL_TYPE= 2;//填空题
+
     private Long id;
     private String content;
     private int errorCount;//错误次数
     private int source;//出处，0-   1-   2-
     private int type;//试题类型
-
+    private Long topicId;
     private KnowledgeTopic topic;//所属知识点
-
+    private Date uptm;
 
     public Long getId() {
         return id;
@@ -58,6 +62,14 @@ public class Question implements Serializable {
         this.type = type;
     }
 
+    public Long getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(Long topicId) {
+        this.topicId = topicId;
+    }
+
     public KnowledgeTopic getTopic() {
         return topic;
     }
@@ -67,6 +79,11 @@ public class Question implements Serializable {
     }
 
 
+    public Date getUptm() {
+        return uptm;
+    }
 
-
+    public void setUptm(Date uptm) {
+        this.uptm = uptm;
+    }
 }

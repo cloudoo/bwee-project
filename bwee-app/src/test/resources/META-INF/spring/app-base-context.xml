@@ -8,10 +8,10 @@
 
     <!--<import resource="classpath:/META-INF/spring-samples/spring-root-context.xml" />-->
     <import resource="classpath:/META-INF/spring/db-mybatis.xml" />
-    <import resource="classpath:/META-INF/spring/db-freereport-context.xml" />
+
 
     <bean id="propertyConfigurer" class="org.jasypt.spring3.properties.EncryptablePropertyPlaceholderConfigurer"
-          lazy-init="false" scope="singleton" depends-on="systemPropsLoader">
+          lazy-init="false" scope="singleton"  >
         <constructor-arg ref="configEncryptor" />
         <property name="locations">
             <list>

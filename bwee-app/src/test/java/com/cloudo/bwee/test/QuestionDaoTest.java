@@ -5,7 +5,8 @@ package com.cloudo.bwee.test;
 import com.cloudo.bwee.dao.QuestionDao;
 
 
-
+import com.cloudo.bwee.domain.Question;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,7 +27,26 @@ public class QuestionDaoTest  {
 
     @Test
     public void testSelect(){
-        
+
+        Question question = new Question();
+        question.setContent("test");
+        question.setErrorCount(1);
+        question.setType(Question.SELE_TYPE);
+        int re = dao.insert(question);
+
+        Assert.assertTrue(re>0);
+
+        Question q2 = dao.findById(question.getId());
+
+        Assert.assertEquals(question.getContent(),q2.getContent());
+
+        dao.delete(question.getId());
+
+        q2 = dao.findById(question.getId());
+
+        Assert.assertNull(q2);
+
+
     }
 
     @Test

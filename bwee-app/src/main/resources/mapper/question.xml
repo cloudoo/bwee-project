@@ -1,42 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloudo.bwee.dao.QuestionDao">
 
   <resultMap id="BaseResultMap" type="com.cloudo.bwee.domain.Question">
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="CONTENT" jdbcType="VARCHAR" property="content" />
-    <result column="ERROR_COUNT" jdbcType="BIGINT" property="error_count" />
-    <result column="SOURCE" jdbcType="VARCHAR" property="source" />
-    <result column="TYPE" jdbcType="VARCHAR" property="type" />
-
+    <result column="ERROR_COUNT" jdbcType="INTEGER" property="errorCount" />
+    <result column="SOURCE" jdbcType="INTEGER" property="source" />
+    <result column="TYPE" jdbcType="INTEGER" property="type" />
+    <result column="UP_TM" jdbcType="TIMESTAMP"  javaType="java.util.Date" property="upTm" />
+    <association property="topic" column="topic_id" javaType="KnowledgeTopic">
+      <id column="TP_ID" property="id" jdbcType="BIGINT" />
+      <result column="TP_CONTENT" jdbcType="VARCHAR" property="content" />
+      <result column="SUBJECT" jdbcType="VARCHAR" property="subject" />
+      <result column="PAGE_INDEX" jdbcType="INTEGER" property="pageIndex" />
+      <result column="TP_UP_TM" jdbcType="TIMESTAMP"  javaType="java.util.Date" property="upTm" />
+    </association>
   </resultMap>
 
   <sql id="Base_Column_List">
     ID, CONTENT, ERROR_COUNT, SOURCE, TYPE
   </sql>
+  <sql id="querySql" >
+    select
+    a.*,
+    b.id as tp_id,
+    b.content as tp_content,
+    b.subject as subject,
+    b.page_index as page_Index,
+    b.up_tm as tp_up_tm
+    from BW_QUESTION a
+    left join BW_KNOWLEDGE_TOPIC b on a.topic_id = b.id
+  </sql>
   <sql id="tableName">BW_QUESTION</sql>
+
   <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from BW_QUESTION
-    where ID = #{id,jdbcType=BIGINT}
+    <include refid="querySql" />
+    where a.id = #{id,jdbcType=BIGINT}
   </select>
-  
+
+
+
   <delete id="delete" parameterType="java.lang.Long">
-    delete from BW_QUESTION
-    where ID = #{id,jdbcType=BIGINT}
+    delete from BW_QUESTION a
+    where a.id = #{id,jdbcType=BIGINT}
   </delete>
 
 
   <insert id="insert" parameterType="com.cloudo.bwee.domain.Question" useGeneratedKeys="true" keyProperty="id">
-    insert into BW_QUESTION ( CONTENT, ERROR_COUNT, SOURCE, TYPE)
-    values (#{content,jdbcType=VARCHAR}, #{errorCount,jdbcType=INTEGER},
-      #{source,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR})
+    insert into BW_QUESTION ( TOPIC_ID,CONTENT, ERROR_COUNT, SOURCE, TYPE)
+    values (
+      #{topicId,jdbcType=INTEGER},
+      #{content,jdbcType=VARCHAR}, #{errorCount,jdbcType=INTEGER},
+      #{source,jdbcType=INTEGER}, #{type,jdbcType=INTEGER})
   </insert>
 
+  <update id="update" parameterType="question">
+    update  BW_QUESTION
+    <set>
+      <if test="topicId != null and topic.id !=null ">
+        TOPIC_ID = #{topic.id,jdbcType=INTEGER},
+      </if>
+      <if test="content != null  ">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="errorCount != null">
+        ERROR_COUNT = #{errorCount,jdbcType=INTEGER},
+      </if>
+      <if test="source != null">
+        SOURCE = #{source,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
 
 
-
-
-  
 </mapper>

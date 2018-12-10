@@ -1,6 +1,7 @@
 package com.cloudo.bwee.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class KnowledgeTopic implements Serializable {
 
@@ -8,7 +9,7 @@ public class KnowledgeTopic implements Serializable {
     private String subject;//科目
     private String content;//内容
     private int pageIndex;//哪一页
-
+    private Date upTm;
 
     public Long getId() {
         return id;
@@ -40,5 +41,13 @@ public class KnowledgeTopic implements Serializable {
 
     public void setPageIndex(int pageIndex) {
         this.pageIndex = pageIndex;
+    }
+
+    public Date getUpTm() {
+        return upTm;
+    }
+
+    public void setUpTm(Date upTm) {
+        this.upTm = upTm;
     }
 }
