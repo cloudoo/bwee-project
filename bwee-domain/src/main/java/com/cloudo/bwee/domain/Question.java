@@ -20,7 +20,7 @@ public class Question implements Serializable {
     private int type;//试题类型
     private Long topicId;
     private KnowledgeTopic topic;//所属知识点
-    private Date uptm;
+    private Date upTm;
 
     public Long getId() {
         return id;
@@ -78,12 +78,11 @@ public class Question implements Serializable {
         this.topic = topic;
     }
 
-
-    public Date getUptm() {
-        return uptm;
+    public Date getUpTm() {
+        return upTm;
     }
 
-    public void setUptm(Date uptm) {
-        this.uptm = uptm;
+    public void setUpTm(Date upTm) {
+        this.upTm = upTm;
     }
 }

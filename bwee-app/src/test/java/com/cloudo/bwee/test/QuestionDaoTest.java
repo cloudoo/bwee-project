@@ -28,6 +28,13 @@ public class QuestionDaoTest  {
     @Test
     public void testSelect(){
 
+
+
+
+    }
+
+    @Test
+    public void testCRUD(){
         Question question = new Question();
         question.setContent("test");
         question.setErrorCount(1);
@@ -40,17 +47,21 @@ public class QuestionDaoTest  {
 
         Assert.assertEquals(question.getContent(),q2.getContent());
 
+        q2.setErrorCount(3);
+        q2.setContent("leisy");
+        re = dao.update(q2);
+
+        Question q3 = dao.findById(question.getId());
+
+        Assert.assertEquals(q2.getContent(),q3.getContent());
+        Assert.assertEquals(q2.getErrorCount(),q3.getErrorCount());
+
         dao.delete(question.getId());
 
         q2 = dao.findById(question.getId());
 
         Assert.assertNull(q2);
 
-
-    }
-
-    @Test
-    public void testCRUD(){
 
     }
 

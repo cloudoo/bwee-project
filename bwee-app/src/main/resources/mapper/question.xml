@@ -43,8 +43,8 @@
 
 
   <delete id="delete" parameterType="java.lang.Long">
-    delete from BW_QUESTION a
-    where a.id = #{id,jdbcType=BIGINT}
+    delete from BW_QUESTION
+    where  id = #{id,jdbcType=BIGINT}
   </delete>
 
 

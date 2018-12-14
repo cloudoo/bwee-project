@@ -24,7 +24,7 @@
                 </property>
             </activation>
             <properties>
-                <jetty.port>8270</jetty.port>
+                <jetty.port>8210</jetty.port>
             </properties>
         </profile>
         <!-- 配置在未指定-Dskip.minify的情况下对CSS/JS资源进行压缩优化 -->
@@ -93,9 +93,28 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.cloudo.bwee</groupId>
+            <artifactId>bwee-app</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.6</version>
         </dependency>
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -112,7 +131,23 @@
             <artifactId>gson</artifactId>
             <version>2.2.4</version>
         </dependency>
-
+        <!-- 安全相关 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-web</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.javassist</groupId>

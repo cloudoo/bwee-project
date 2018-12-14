@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+        ">
+
+    <description>声明由SpringMVC负责管理的Servlet相关控制器Bean</description>
+    <context:annotation-config />
+    <mvc:annotation-driven />
+    <mvc:default-servlet-handler />
+
+    <!-- 导入框架推荐配置  -->
+    <!--<import resource="classpath:/META-INF/spring-samples/spring-mvc-context.xml" />-->
+
+
+    <context:component-scan base-package="com.cloudo.bwee.web.controller" />
+
+    <!-- 多location中存在同名资源时的使用优先顺序是从左到右 -->
+    <mvc:resources mapping="/layui/**" location="assets/layui/" />
+    <!--<mvc:resources mapping="/dist/**" location="assets/dist/" />-->
+    <!--<mvc:resources mapping="/plugins/**" location="assets/plugins/" />-->
+
+
+
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+    <!-- set the max upload size100MB -->
+   <property name="maxUploadSize">
+   <value>10485760000</value>
+   </property>
+   <property name="maxInMemorySize">
+   <value>4096</value>
+   </property>
+	</bean>
+
+
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<util:list id="beanList">-->
+                <!--<ref bean="mappingJacksonHttpMessageConverter" />-->
+            <!--</util:list>-->
+        <!--</property>-->
+    <!--</bean>-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+        <util:list id="beanList">
+        <ref bean="mappingJacksonHttpMessageConverter" />
+        </util:list>
+        </property>
+    </bean>
+
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/json;charset=UTF-8</value>
+                <value>application/json;charset=UTF-8</value>
+                <value>application/*+json;*</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <!--<bean class="org.springframework.web.servlet.view.XmlViewResolver">-->
+        <!--<property name="location">-->
+            <!--<value>/WEB-INF/spring-excel-views.xml</value>-->
+        <!--</property>-->
+        <!--<property name="order" value="0" />-->
+    <!--</bean>-->
+
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/" />
+        <property name="suffix" value=".jsp" />
+        <property name="order" value="1" />
+    </bean>
+
+
+    <!--<bean  class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">-->
+        <!--<property name="exceptionMappings">-->
+            <!--<props>-->
+                <!--<prop key="org.apache.shiro.authz.UnauthorizedException">-->
+                    <!--/sys/unauthorized-->
+                <!--</prop>-->
+                <!--<prop key="org.apache.shiro.authz.UnauthenticatedException">-->
+                    <!--/sys/unauthenticated-->
+                <!--</prop>-->
+            <!--</props>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+</beans>
