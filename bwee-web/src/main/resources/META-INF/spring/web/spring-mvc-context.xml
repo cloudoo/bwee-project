@@ -23,7 +23,8 @@
 
     <!-- 多location中存在同名资源时的使用优先顺序是从左到右 -->
     <mvc:resources mapping="/layui/**" location="assets/layui/" />
-    <!--<mvc:resources mapping="/dist/**" location="assets/dist/" />-->
+    <mvc:resources mapping="/admin/**" location="assets/xadmin/" />
+   <mvc:resources mapping="/dist/**" location="assets/dist/" />
     <!--<mvc:resources mapping="/plugins/**" location="assets/plugins/" />-->
 
 

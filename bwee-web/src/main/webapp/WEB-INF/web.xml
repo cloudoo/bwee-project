@@ -99,7 +99,7 @@
     </session-config>
 
     <welcome-file-list>
-        <welcome-file>home.bw</welcome-file>
+        <welcome-file>login.bw</welcome-file>
     </welcome-file-list>
 <!--       <security-constraint>
         <web-resource-collection>
