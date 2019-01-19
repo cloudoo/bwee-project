@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>Shiro安全配置</description>
+
+    <!--<bean id="loginFilter" class="com.csair.r.fr2.auth.LoginFilter"></bean>-->
+
+
+    <!--<bean id="pageAccessFilter" class="com.csair.r.fr2.auth.PageAccessFilter"/>-->
+
+    <!--<bean id="xssFilter" class="com.csair.r.fr2.auth.XssFilter"></bean>-->
+
+    <!--<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">-->
+        <!--<property name="securityManager" ref="securityManager"/>-->
+        <!--<property name="loginUrl" value="/login.fr"/>-->
+        <!--<property name="successUrl" value="/index.fr"/>-->
+        <!--<property name="unauthorizedUrl" value="/sys/unauthorized"/>-->
+        <!--<property name="filters">-->
+            <!--<map>-->
+                <!--<entry key="loginSess" value-ref="loginFilter"/>-->
+                <!--<entry key="pageAccess" value-ref="pageAccessFilter"/>-->
+                <!--<entry key="xssFilter" value-ref="xssFilter" />-->
+            <!--</map>-->
+        <!--</property>-->
+        <!--<property name="filterChainDefinitions">-->
+            <!--<value>-->
+                <!--/login.fr=anon-->
+                <!--/submit.fr=anon-->
+                <!--/bootstrap/**=anon-->
+                <!--/dist/**=anon-->
+                <!--/plugins/**=anon-->
+                <!--/test/**=anon-->
+                <!--/favicon.ico=anon-->
+                <!--/freshVerifyCode=anon-->
+                <!--/helpVideo=anon-->
+                <!--/getDymanicKeys=anon-->
+                <!--/test/isOk=anon-->
+                <!--/WEB-INF/pages/unexpected-error.jsp=anon-->
+                <!--/logout.fr = logout-->
+                <!--/swagger-ui.html=anon-->
+                <!--/webjars/**=anon-->
+                <!--/swagger-resources/**=anon-->
+                <!--/v2/**=anon-->
+                <!--/sys/404=user-->
+                <!--/sys/405=user-->
+                <!--/sys/406=user-->
+                <!--/sys/500=user-->
+                <!--/sys/unauthorized=user-->
+                <!--/sys/unauthenticated=user-->
+                <!--/sys/ajaxUnauthorized=user-->
+                <!--/**=user,loginSess,pageAccess,xssFilter-->
+            <!--</value>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 进行缓存的操作配置 &ndash;&gt;-->
+    <!--<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 自定义session监听器 &ndash;&gt;-->
+    <!--<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">-->
+        <!--<property name="sessionListeners" ref="frSessionListener"/>-->
+        <!--<property name="globalSessionTimeout" value="5400000"/>-->
+        <!--&lt;!&ndash;<property name="globalSessionTimeout" value="20000"/>&ndash;&gt;-->
+        <!--<property name="deleteInvalidSessions" value="true"/>-->
+        <!--<property name="sessionValidationSchedulerEnabled" value="true"/>-->
+        <!--<property name="sessionIdCookieEnabled" value="true"/>-->
+        <!--<property name="sessionIdCookie" ref="sessionIdCookie"/>-->
+    <!--</bean>-->
+    <!--<bean id="frSessionListener" class="com.csair.r.fr2.auth.FrSessionListener">-->
+        <!--<property name="userServiceProxy">-->
+            <!--<bean class="org.springframework.aop.framework.ProxyFactoryBean">-->
+                <!--<property name="targetSource">-->
+                    <!--<bean class="org.springframework.aop.target.LazyInitTargetSource">-->
+                        <!--<property name="targetBeanName">-->
+                            <!--<idref bean="userServiceProxy"/>-->
+                        <!--</property>-->
+                    <!--</bean>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">-->
+        <!--<property name="realm" ref="frRealm"/>-->
+        <!--<property name="cacheManager" ref="cacheManager"/>-->
+        <!--<property name="sessionManager" ref="sessionManager"/> &lt;!&ndash; 配置sessionListener &ndash;&gt;-->
+    <!--</bean>-->
+
+    <!--<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>-->
+
+    <!--&lt;!&ndash; 項目自定义的Realm, 所有accountService依赖的dao都需要用depends-on声明 &ndash;&gt;-->
+    <!--<bean id="frRealm" class="com.csair.r.fr2.auth.ShiroRealm">-->
+        <!--<property name="userServiceProxy">-->
+            <!--<bean class="org.springframework.aop.framework.ProxyFactoryBean">-->
+                <!--<property name="targetSource">-->
+                    <!--<bean class="org.springframework.aop.target.LazyInitTargetSource">-->
+                        <!--<property name="targetBeanName">-->
+                            <!--<idref bean="userServiceProxy"/>-->
+                        <!--</property>-->
+                    <!--</bean>-->
+                <!--</property>-->
+            <!--</bean>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="userServiceProxy" class="com.csair.r.fr2.mvc.controller.UserServiceProxy" lazy-init="true">-->
+    <!--</bean>-->
+    <!---->
+
+    <!--&lt;!&ndash; Enable Shiro Annotations for Spring-configured beans.   &ndash;&gt;-->
+    <!--<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"-->
+          <!--depends-on="lifecycleBeanPostProcessor"/>-->
+    <!--<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">-->
+        <!--<property name="securityManager" ref="securityManager"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 会话cookie配置&ndash;&gt;-->
+    <!--<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">-->
+        <!--<constructor-arg value="sid"/>-->
+        <!--<property name="httpOnly" value="true"/>-->
+        <!--<property name="maxAge" value="-1"/>-->
+    <!--</bean>-->
+    <!--<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">-->
+        <!--<constructor-arg value="rememberMe"/>-->
+        <!--<property name="httpOnly" value="true"/>-->
+        <!--<property name="maxAge" value="259200"/>&lt;!&ndash; 30天 &ndash;&gt;-->
+    <!--</bean>-->
+
+</beans>

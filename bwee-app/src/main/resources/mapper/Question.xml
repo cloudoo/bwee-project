@@ -31,7 +31,7 @@
     b.page_index as page_Index,
     b.up_tm as tp_up_tm
     from BW_QUESTION a
-    left join BW_KEY_POINT b on a.topic_id = b.id
+    left join BW_KNOWLEDGE_TOPIC b on a.topic_id = b.id
   </sql>
   <sql id="tableName">BW_QUESTION</sql>
 
