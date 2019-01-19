@@ -8,6 +8,7 @@
         <module>bwee-app</module>
         <module>bwee-web</module>
         <module>bwee-domain</module>
+        <module>bwee-app-interface</module>
     </modules>
     <groupId>com.cloudo.bwee</groupId>
     <artifactId>bwee-project</artifactId>

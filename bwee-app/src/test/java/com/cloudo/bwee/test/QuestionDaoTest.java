@@ -26,7 +26,7 @@ public class QuestionDaoTest  {
     private QuestionDao dao;
 
     @Test
-    public void testSelect(){
+    public void testCRUD(){
 
         Question question = new Question();
         question.setContent("test");
@@ -50,7 +50,7 @@ public class QuestionDaoTest  {
     }
 
     @Test
-    public void testCRUD(){
+    public void testQuery(){
 
     }
 

@@ -11,7 +11,7 @@ public class EncypterTest {
         BasicTextEncryptor textEncryptor = new BasicTextEncryptor();     
         
         textEncryptor.setPassword("bwee");
-        String url = "jdbc:mysql://10.79.169.27:3306/bwee_dev?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false";
+        String url = "jdbc:mysql://127.0.0.1:3306/dev?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false";
             String jdbcUrl = textEncryptor.encrypt(url);
         System.out.println("jdbcUrl:"+jdbcUrl); 
         String user = textEncryptor.encrypt("bwee_test");

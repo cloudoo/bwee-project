@@ -10,7 +10,7 @@
     <result column="SOURCE" jdbcType="INTEGER" property="source" />
     <result column="TYPE" jdbcType="INTEGER" property="type" />
     <result column="UP_TM" jdbcType="TIMESTAMP"  javaType="java.util.Date" property="upTm" />
-    <association property="topic" column="topic_id" javaType="KnowledgeTopic">
+    <association property="topic" column="topic_id" javaType="KeyPoint">
       <id column="TP_ID" property="id" jdbcType="BIGINT" />
       <result column="TP_CONTENT" jdbcType="VARCHAR" property="content" />
       <result column="SUBJECT" jdbcType="VARCHAR" property="subject" />
@@ -31,7 +31,7 @@
     b.page_index as page_Index,
     b.up_tm as tp_up_tm
     from BW_QUESTION a
-    left join BW_KNOWLEDGE_TOPIC b on a.topic_id = b.id
+    left join BW_KEY_POINT b on a.topic_id = b.id
   </sql>
   <sql id="tableName">BW_QUESTION</sql>
 
@@ -43,8 +43,8 @@
 
 
   <delete id="delete" parameterType="java.lang.Long">
-    delete from BW_QUESTION a
-    where a.id = #{id,jdbcType=BIGINT}
+    delete from BW_QUESTION
+    where id = #{id,jdbcType=BIGINT}
   </delete>
 
 

@@ -1,9 +1,11 @@
 package com.cloudo.bwee.domain;
 
+import com.cloudo.base.domain.BaseDomain;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class KnowledgeTopic implements Serializable {
+public class KeyPoint extends BaseDomain implements Serializable {
 
     private Long id;
     private String subject;//科目

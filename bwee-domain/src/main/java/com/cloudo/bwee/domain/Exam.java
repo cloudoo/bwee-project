@@ -1,12 +1,15 @@
 package com.cloudo.bwee.domain;
 
+import com.cloudo.base.domain.BaseDomain;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class TestPaper implements Serializable {
+public class Exam extends BaseDomain implements Serializable{
 
     private Long id;
+    private String description;
     /**
      * 考试题目
      */
@@ -15,7 +18,7 @@ public class TestPaper implements Serializable {
     private Date endDt;//结束时间
 
     private float score;
-
+    private Date createTm;
 
     public Long getId() {
         return id;
@@ -23,6 +26,14 @@ public class TestPaper implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Question> getQuestions() {
@@ -55,5 +66,13 @@ public class TestPaper implements Serializable {
 
     public void setScore(float score) {
         this.score = score;
+    }
+
+    public Date getCreateTm() {
+        return createTm;
+    }
+
+    public void setCreateTm(Date createTm) {
+        this.createTm = createTm;
     }
 }

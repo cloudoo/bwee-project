@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudo.bwee.dao.ExamDao">
+
+  <resultMap id="BaseResultMap" type="com.cloudo.bwee.domain.Exam">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="STR_DT" jdbcType="TIMESTAMP" property="strDt" />
+    <result column="END_DT" jdbcType="TIMESTAMP" property="endDt" />
+    <result column="SCORE" jdbcType="DOUBLE" property="score" />
+    <result column="CREATE_TM" jdbcType="TIMESTAMP"  javaType="java.util.Date" property="createTm" />
+    <association property="questions" column="question_id" javaType="Question">
+      <id column="Q_ID" property="id" jdbcType="BIGINT" />
+      <result column="Q_CONTENT" jdbcType="VARCHAR" property="content" />
+      <result column="Q_ERROR_COUNT" jdbcType="INTEGER" property="errorCount" />
+      <result column="Q_TYPE" jdbcType="INTEGER" property="type" />
+      <result column="Q_UP_TM" jdbcType="TIMESTAMP"  javaType="java.util.Date" property="upTm" />
+    </association>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    ID, CONTENT, ERROR_COUNT, SOURCE, TYPE
+  </sql>
+  <sql id="querySql" >
+    select
+    a.*,
+    c.id as q_id,
+    c.content as q_content,
+    c.error_count as q_error_count,
+    c.type as q_type,
+    c.up_tm as q_up_tm
+    from BW_EXAM a
+    left join BW_EXAM_QUESTION b on a.id = b.exam_id
+    left join BW_QUESTION c on c.id = b.question_id
+
+  </sql>
+  <sql id="tableName">BW_EXAM</sql>
+
+  <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <include refid="querySql" />
+    where a.id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+
+  <delete id="delete" parameterType="java.lang.Long">
+    delete from BW_EXAM
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+
+  <insert id="insert" parameterType="com.cloudo.bwee.domain.Exam" useGeneratedKeys="true" keyProperty="id">
+    insert into BW_EXAM (STR_DT,END_DT, DESCRIPTION, SCORE)
+    values (
+      #{strDt,jdbcType=TIMESTAMP},
+      #{endDt,jdbcType=TIMESTAMP},
+      #{description,jdbcType=VARCHAR},
+      #{score,jdbcType=FLOAT})
+  </insert>
+
+
+
+  <update id="update" parameterType="exam">
+    update  BW_EXAM
+    <set>
+      <if test="strDt != null ">
+        STR_DT = #{strDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endDt != null ">
+        STR_DT = #{endDt,jdbcType=TIMESTAMP},
+      </if> <if test="description != null  ">
+        CONTENT = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        SCORE = #{score,jdbcType=FLOAT},
+      </if>
+
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!-- 对试卷中的考题的操作-->
+  <insert id="insertQuestions"  useGeneratedKeys="true" keyColumn="id">
+    insert into BW_EXAM_QUESTION (EXAM_ID,QUESTION_ID)
+    values
+    <foreach collection="qIds" item="qId" index= "index" separator="," >
+      (#{examId,jdbcType=BIGINT},
+       #{qId,jdbcType=BIGINT})
+    </foreach>
+  </insert>
+
+  <delete id="deleteAllQuestion" parameterType="java.lang.Long">
+    delete from BW_EXAM_QUESTION
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <delete id="deleteQuestions" parameterType="java.lang.Long">
+    delete from BW_EXAM_QUESTION
+    where exam_id = #{examId,jdbcType=BIGINT} and question_id in
+    <foreach collection="qIds" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+  </delete>
+
+</mapper>

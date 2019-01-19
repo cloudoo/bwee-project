@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cloudo.bwee.dao.KnowledgeDao">
+<mapper namespace="com.cloudo.bwee.dao.KeyPointDao">
 
-  <resultMap id="BaseResultMap" type="com.cloudo.bwee.domain.KnowledgeTopic">
+  <resultMap id="BaseResultMap" type="com.cloudo.bwee.domain.KeyPoint">
 
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="CONTENT" jdbcType="VARCHAR" property="content" />
@@ -15,27 +15,42 @@
   <sql id="Base_Column_List">
     ID, SUBJECT,CONTENT, PAGE_INDEX, UP_TM
   </sql>
-  <sql id="tableName">BW_KNOWLEDGE_TOPIC</sql>
+  <sql id="tableName">BW_KEY_POINT</sql>
   <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from BW_KNOWLEDGE_TOPIC
+    from BW_KEY_POINT
     where ID = #{id,jdbcType=BIGINT}
   </select>
   
   <delete id="delete" parameterType="java.lang.Long">
-    delete from BW_KNOWLEDGE_TOPIC
+    delete from BW_KEY_POINT
     where ID = #{id,jdbcType=BIGINT}
   </delete>
 
 
-  <insert id="insert" parameterType="com.cloudo.bwee.domain.KnowledgeTopic" useGeneratedKeys="true" keyProperty="id">
-    insert into BW_KNOWLEDGE_TOPIC ( SUBJECT,CONTENT, PAGE_INDEX)
+  <insert id="insert" parameterType="com.cloudo.bwee.domain.KeyPoint" useGeneratedKeys="true" keyProperty="id">
+    insert into BW_KEY_POINT ( SUBJECT,CONTENT, PAGE_INDEX)
     values (#{subject,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
       #{pageIndex,jdbcType=INTEGER})
   </insert>
 
+  <update id="update" parameterType="keyPoint">
+    update  BW_KEY_POINT
+    <set>
+      <if test="subject != null">
+        SUBJECT = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null  ">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="pageIndex != null">
+        PAGE_INDEX = #{pageIndex,jdbcType=VARCHAR},
+      </if>
 
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
 
 
 
