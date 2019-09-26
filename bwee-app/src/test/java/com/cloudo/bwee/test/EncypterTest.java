@@ -4,20 +4,39 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import org.junit.Test;
 
 
-public class EncypterTest {  
-  
-    public static void main(String[] args) {  
-         //加密     
-        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();     
-        
+public class EncypterTest {
+
+    public static void encptRemote(){
+        //加密
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+
         textEncryptor.setPassword("bwee");
         String url = "jdbc:mysql://10.79.169.27:3306/bwee_dev?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false";
-            String jdbcUrl = textEncryptor.encrypt(url);
-        System.out.println("jdbcUrl:"+jdbcUrl); 
+        String jdbcUrl = textEncryptor.encrypt(url);
+        System.out.println("jdbcUrl:"+jdbcUrl);
         String user = textEncryptor.encrypt("bwee_test");
-        System.out.println("user:"+user); 
+        System.out.println("user:"+user);
         String passwd = textEncryptor.encrypt("bwee_test*1");
         System.out.println("passwd:"+passwd);
+    }
+
+    public static void encptLocal(){
+        //加密
+        BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+
+        textEncryptor.setPassword("bwee");
+        String url = "jdbc:mysql://127.0.0.1:3306/bwee?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false";
+        String jdbcUrl = textEncryptor.encrypt(url);
+        System.out.println("jdbcUrl:"+jdbcUrl);
+        String user = textEncryptor.encrypt("bwee_app");
+        System.out.println("user:"+user);
+        String passwd = textEncryptor.encrypt("bwee_app*1");
+        System.out.println("passwd:"+passwd);
+    }
+  
+    public static void main(String[] args) {  
+
+        EncypterTest.encptLocal();
 
           
     }

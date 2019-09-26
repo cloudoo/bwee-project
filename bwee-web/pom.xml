@@ -39,6 +39,7 @@
                     <plugin>
                         <groupId>com.samaxes.maven</groupId>
                         <artifactId>minify-maven-plugin</artifactId>
+                        <version>1.7.6</version>
                         <executions>
                             <execution>
                                 <id>default-minify</id>
@@ -77,6 +78,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
+                        <version>3.2.3</version>
                         <configuration>
                             <!-- 为了将压缩过的文件以同名覆盖回来后放入WAR包 -->
                             <webResources>
@@ -149,11 +151,11 @@
             <artifactId>shiro-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>${javassist_version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.javassist</groupId>-->
+<!--            <artifactId>javassist</artifactId>-->
+<!--            <version>${javassist.version}</version>-->
+<!--        </dependency>-->
         <!-- JavaEE规范Web应用必要依赖，必要时还应添加jstl、taglibs -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -230,6 +232,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.3</version>
                 <configuration>
                     <!-- 为了让WAR打包插件设定包名称不带版本号 -->
                     <warName>${project.artifactId}</warName>
@@ -241,10 +244,10 @@
                     </archive>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.20.v20190813</version>
                 <configuration>
                     <httpConnector>
                         <port>${jetty.port}</port>
@@ -272,6 +275,7 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>3.6.2</version>
                 <configuration>
                     <port>${jetty.port}</port>
                     <path>${jetty.context.path}</path>

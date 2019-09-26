@@ -1,10 +1,10 @@
-package com.cloudo.bwee.dao;
+package com.cloudo.bwee.repository;
 
 import com.cloudo.bwee.domain.Question;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuestionDao {
+public interface QuestionRepository {
     public int insert(Question question);
     public Question findById(Long id);
     public int delete(Long id);

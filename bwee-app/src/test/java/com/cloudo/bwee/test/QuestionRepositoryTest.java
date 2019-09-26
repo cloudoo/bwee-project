@@ -2,7 +2,7 @@ package com.cloudo.bwee.test;
 
 
 
-import com.cloudo.bwee.dao.QuestionDao;
+import com.cloudo.bwee.repository.QuestionRepository;
 
 
 import com.cloudo.bwee.domain.Question;
@@ -18,12 +18,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath*:/META-INF/spring/*.xml" })
-public class QuestionDaoTest  {
+public class QuestionRepositoryTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(QuestionDaoTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(QuestionRepositoryTest.class);
 
     @Autowired
-    private QuestionDao dao;
+    private QuestionRepository dao;
 
     @Test
     public void testSelect(){

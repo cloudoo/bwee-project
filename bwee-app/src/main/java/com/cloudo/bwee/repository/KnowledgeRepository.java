@@ -1,11 +1,11 @@
-package com.cloudo.bwee.dao;
+package com.cloudo.bwee.repository;
 
 import com.cloudo.bwee.domain.KnowledgeTopic;
 
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface KnowledgeDao {
+public interface KnowledgeRepository {
 
     public int insert(KnowledgeTopic knowledgeTopic);
     public KnowledgeTopic findById(Long id);
