@@ -39,7 +39,7 @@
                     <plugin>
                         <groupId>com.samaxes.maven</groupId>
                         <artifactId>minify-maven-plugin</artifactId>
-                        <version>1.7.6</version>
+                        <version>1.7.1</version>
                         <executions>
                             <execution>
                                 <id>default-minify</id>
@@ -275,7 +275,7 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>3.6.2</version>
+                <version>2.2</version>
                 <configuration>
                     <port>${jetty.port}</port>
                     <path>${jetty.context.path}</path>
