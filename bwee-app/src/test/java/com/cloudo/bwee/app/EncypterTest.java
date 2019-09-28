@@ -1,4 +1,4 @@
-package com.cloudo.bwee.test;
+package com.cloudo.bwee.app;
 
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.junit.Test;

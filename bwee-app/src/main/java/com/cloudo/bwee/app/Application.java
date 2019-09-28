@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @ComponentScan(basePackages = "com.cloudo.bwee")
 @EnableJpaRepositories(basePackages = "com.cloudo.bwee.repository")
-@EntityScan("com.csair.dt.*.domain")
+@EntityScan("com.cloudo.bwee.domain")
 public class Application {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);

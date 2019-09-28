@@ -6,7 +6,7 @@
  * @Date 2017-11-20 15:19
  * @Version 0.1
  **/
-package com.cloudo.bwee.test;
+package com.cloudo.bwee.app;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig;

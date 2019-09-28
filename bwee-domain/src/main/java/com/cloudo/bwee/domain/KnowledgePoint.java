@@ -1,15 +1,26 @@
 package com.cloudo.bwee.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-public class KnowledgeTopic implements Serializable {
+/**
+ *
+ * 知识考点
+ */
+@Table(name="bw_kdg_point")
+@Entity
+public class KnowledgePoint implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String subject;//科目
     private String content;//内容
+
     private int pageIndex;//哪一页
     private Date upTm;
+
 
     public Long getId() {
         return id;

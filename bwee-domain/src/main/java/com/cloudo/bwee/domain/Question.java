@@ -1,25 +1,49 @@
 package com.cloudo.bwee.domain;
 
+
+
 import java.io.Serializable;
 import java.util.Date;
+
+import java.util.Set;
+import javax.persistence.*;
+
+
 
 /**
  *
  * 考试题目
  *
  */
+@Table(name="bw_question")
+@Entity
 public class Question implements Serializable {
 
     public static int SELE_TYPE= 1;//选择题
     public static int FILL_TYPE= 2;//填空题
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String content;
+    private String answer;
+    @Column(name="error_count")
     private int errorCount;//错误次数
     private int source;//出处，0-   1-   2-
     private int type;//试题类型
-    private Long topicId;
-    private KnowledgeTopic topic;//所属知识点
+    private int value;//分值
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.MERGE,
+                    CascadeType.PERSIST
+            })
+    @JoinTable(name="bw_question_kdg",
+            joinColumns = {@JoinColumn(name="question_id")},
+            inverseJoinColumns = {@JoinColumn(name="kdg_id")})
+    private Set<KnowledgePoint> topics;//所属知识点
+
     private Date upTm;
 
     public Long getId() {
@@ -38,6 +62,12 @@ public class Question implements Serializable {
         this.content = content;
     }
 
+    public String getAnswer() {
+        return answer;
+    }
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
     public int getErrorCount() {
         return errorCount;
     }
@@ -62,20 +92,20 @@ public class Question implements Serializable {
         this.type = type;
     }
 
-    public Long getTopicId() {
-        return topicId;
+    public int getValue() {
+        return value;
     }
 
-    public void setTopicId(Long topicId) {
-        this.topicId = topicId;
+    public void setValue(int value) {
+        this.value = value;
     }
 
-    public KnowledgeTopic getTopic() {
-        return topic;
+    public Set<KnowledgePoint> getTopics() {
+        return topics;
     }
 
-    public void setTopic(KnowledgeTopic topic) {
-        this.topic = topic;
+    public void setTopics(Set<KnowledgePoint> topics) {
+        this.topics = topics;
     }
 
     public Date getUpTm() {
