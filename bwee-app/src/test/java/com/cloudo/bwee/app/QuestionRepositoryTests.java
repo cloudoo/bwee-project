@@ -2,15 +2,20 @@
 
 package com.cloudo.bwee.app;
 
+import com.cloudo.bwee.domain.KnowledgePoint;
 import com.cloudo.bwee.domain.Question;
 import com.cloudo.bwee.repository.QuestionRepository;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,45 +25,103 @@ public class QuestionRepositoryTests {
     private QuestionRepository questionRepository;
 
     @Test
-    public void testFind() {
-        Question question = new Question();
-        question.setContent("test1");
-        question.setAnswer("test1");
-        question.setErrorCount(2);
-        question.setSource(1);
+    public void testCRUD() {
 
-        question.setType(1);
+        Question q = new Question();
+        q.setContent("test1");
+        q.setAnswer("test1");
+        q.setErrorCount(2);
+        q.setSource(1);
+        q.setType(1);
 
-        questionRepository.save(question);
+        questionRepository.save(q);
+       Assert.assertNotNull(q.getId());
 
-        Question question2 = new Question();
-        question2.setContent("test2");
-        question2.setAnswer("test2");
-        question2.setErrorCount(1);
-        question2.setSource(2);
+        List<Question> qs = questionRepository.findByContent(q.getContent());
+        Assert.assertEquals(1,qs.size());
+        Question tempQ = qs.get(0);
+        Assert.assertEquals(q.getId(),tempQ.getId());
+        Assert.assertEquals(q.getContent(),tempQ.getContent());
+        Assert.assertEquals(q.getAnswer(),tempQ.getAnswer());
+        Assert.assertEquals(q.getErrorCount(),tempQ.getErrorCount());
+        Assert.assertEquals(q.getSource(),tempQ.getSource());
+        Assert.assertEquals(q.getType(),tempQ.getType());
 
-        question2.setType(2);
-        questionRepository.save(question2);
-
+        Question q2 = new Question();
+        q2.setContent("test2");
+        q2.setAnswer("test2");
+        q2.setErrorCount(1);
+        q2.setSource(2);
+        q2.setType(2);
+        questionRepository.save(q2);
 
         List<Question> questions  = questionRepository.findAll();
+        Assert.assertEquals(questions.size(),2);
 
-        for(Question qu:questions){
-            System.out.println(qu);
-        }
+         Optional<Question> q3o= questionRepository.findById(q2.getId());
+        Question q3 = q3o.get();
+        q3.setAnswer("修改一下");
+        q3.setContent("没有的事情");
+        q3.setErrorCount(1);
+        questionRepository.save(q3);
 
+        Optional<Question> q4q = questionRepository.findById(q3.getId());
+        Question q4 = q4q.get();
+        Assert.assertEquals(q4.getContent(),"没有的事情");
+        Assert.assertEquals(q4.getAnswer(),"修改一下");
 
         questionRepository.deleteAll();
+        questions  = questionRepository.findAll();
 
+        Assert.assertEquals(questions.size(),0);
 
 
     }
 
     @Test
+    public void testChildSave(){
+
+        Question q1 = new Question();
+        q1.setContent("test2");
+        q1.setAnswer("test2");
+        q1.setErrorCount(1);
+        q1.setSource(2);
+        q1.setType(2);
+        //更新子类测试
+        KnowledgePoint point = new KnowledgePoint();
+        point.setContent("哈哈");
+        point.setPageIndex(1);
+        point.setSubject("语文");
+        Set<KnowledgePoint> pointSet = new HashSet<>();
+        pointSet.add(point);
+        q1.setTopics(pointSet);
+
+        questionRepository.save(q1);
+        Optional<Question> q5q = questionRepository.findById(q1.getId());
+        Question q5 = q5q.get();
+        Assert.assertNotNull(q5.getTopics());
+
+        questionRepository.delete(q1);
+        Optional  qq = questionRepository.findById(q1.getId());
+        Assert.assertNull(qq.get());
+    }
+
+    @Test
+    public void testDelete(){
+
+        Optional<Question> qo = questionRepository.findById(26l);
+        Question q = qo.get();
+
+        questionRepository.delete(q);
+        Optional qq = questionRepository.findById(26l);
+        Assert.assertNull(qq.get());
+
+    }
+
+
+
+    @Test
     public void testOther(){
-        for(int i=0;i<97;i++){
-            String test= ",{\"type\":\"string\",\"index\":"+i+",\"format\":\"\"}";
-            System.out.println(test);
-        }
+
     }
 }

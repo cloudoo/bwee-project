@@ -11,7 +11,7 @@ public class User implements Serializable {
     private Long id;
     private String name;
     private String password;
-    private int cellphone;
+    private String cellphone;
     @Column(name="register_tm")
     private Date registerTm;//注册时间
 
@@ -41,11 +41,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public int getCellphone() {
+    public String getCellphone() {
         return cellphone;
     }
 
-    public void setCellphone(int cellphone) {
+    public void setCellphone(String cellphone) {
         this.cellphone = cellphone;
     }
 

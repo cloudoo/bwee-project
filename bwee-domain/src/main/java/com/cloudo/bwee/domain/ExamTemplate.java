@@ -28,8 +28,11 @@ public class ExamTemplate {
                     CascadeType.PERSIST
             })
     @JoinTable(name="bw_exam_template_question",
-            joinColumns = {@JoinColumn(name="exam_template_id")},
-            inverseJoinColumns = {@JoinColumn(name="question_id")})
+            joinColumns = {@JoinColumn
+                    (name="exam_template_id",
+                    foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))
+            },
+            inverseJoinColumns = {@JoinColumn(name="question_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))})
     private Set<Question> questions;
 
     /**
@@ -49,6 +52,21 @@ public class ExamTemplate {
         this.id = id;
     }
 
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public Date getUpTm() {
+        return upTm;
+    }
+
+    public void setUpTm(Date upTm) {
+        this.upTm = upTm;
+    }
 
     public Set<Question> getQuestions() {
         return questions;

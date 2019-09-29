@@ -40,8 +40,8 @@ public class Question implements Serializable {
                     CascadeType.PERSIST
             })
     @JoinTable(name="bw_question_kdg",
-            joinColumns = {@JoinColumn(name="question_id")},
-            inverseJoinColumns = {@JoinColumn(name="kdg_id")})
+            joinColumns = {@JoinColumn(name="question_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))},
+            inverseJoinColumns = {@JoinColumn(name="kdg_id",foreignKey = @ForeignKey(name = "none",value = ConstraintMode.NO_CONSTRAINT))})
     private Set<KnowledgePoint> topics;//所属知识点
 
     private Date upTm;
