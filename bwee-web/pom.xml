@@ -101,13 +101,28 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+<!--        -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-web</artifactId>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-webmvc</artifactId>-->
+<!--        </dependency>-->
 
         <!-- 建议放到父pom中 -->
         <dependency>
@@ -232,82 +247,92 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
-                <configuration>
-                    <!-- 为了让WAR打包插件设定包名称不带版本号 -->
-                    <warName>${project.artifactId}</warName>
-                    <archive>
-                        <!-- 为了在生成的MANIFEST.MF文件中添加Class-Path -->
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.20.v20190813</version>
-                <configuration>
-                    <httpConnector>
-                        <port>${jetty.port}</port>
-                    </httpConnector>
-                    <!--  <connectors>
-                         <connector implementation="org.eclipse.jetty.server.bio.SelectChannelConnector">
-                             <port>${jetty.port}</port>
-                         </connector>
-                         <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">
-                             <port>9443</port>
-                             <password>bigroup@2015</password>
-                         </connector>
-                     </connectors> -->
-                    <useTestClasspath>false</useTestClasspath>
-                    <contextXml>src/main/resources/jetty-contexts.xml</contextXml>
-                    <webAppConfig>
-                        <contextPath>/</contextPath>
-                        <!-- 修改了默认属性，防止静态文件被jetty锁定 -->
-                        <defaultsDescriptor>src/main/webapp/WEB-INF/webdefault.xml</defaultsDescriptor>
-                    </webAppConfig>
-
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <port>${jetty.port}</port>
-                    <path>${jetty.context.path}</path>
-                    <useTestClasspath>false</useTestClasspath>
-                </configuration>
-            </plugin>
-
         </plugins>
-
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-            </testResource>
-            <!-- 只为了将webapp目录也被添加进eclipse的源码视图中 -->
-            <testResource>
-                <directory>src/main/webapp</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>WEB-INF/web*.xml</include>
-                </includes>
-            </testResource>
-        </testResources>
     </build>
+
+
+<!--    <build>-->
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-war-plugin</artifactId>-->
+<!--                <version>3.2.3</version>-->
+<!--                <configuration>-->
+<!--                    &lt;!&ndash; 为了让WAR打包插件设定包名称不带版本号 &ndash;&gt;-->
+<!--                    <warName>${project.artifactId}</warName>-->
+<!--                    <archive>-->
+<!--                        &lt;!&ndash; 为了在生成的MANIFEST.MF文件中添加Class-Path &ndash;&gt;-->
+<!--                        <manifest>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.eclipse.jetty</groupId>-->
+<!--                <artifactId>jetty-maven-plugin</artifactId>-->
+<!--                <version>9.4.20.v20190813</version>-->
+<!--                <configuration>-->
+<!--                    <httpConnector>-->
+<!--                        <port>${jetty.port}</port>-->
+<!--                    </httpConnector>-->
+<!--                    &lt;!&ndash;  <connectors>-->
+<!--                         <connector implementation="org.eclipse.jetty.server.bio.SelectChannelConnector">-->
+<!--                             <port>${jetty.port}</port>-->
+<!--                         </connector>-->
+<!--                         <connector implementation="org.eclipse.jetty.server.ssl.SslSelectChannelConnector">-->
+<!--                             <port>9443</port>-->
+<!--                             <password>bigroup@2015</password>-->
+<!--                         </connector>-->
+<!--                     </connectors> &ndash;&gt;-->
+<!--                    <useTestClasspath>false</useTestClasspath>-->
+<!--                    <contextXml>src/main/resources/jetty-contexts.xml</contextXml>-->
+<!--                    <webAppConfig>-->
+<!--                        <contextPath>/</contextPath>-->
+<!--                        &lt;!&ndash; 修改了默认属性，防止静态文件被jetty锁定 &ndash;&gt;-->
+<!--                        <defaultsDescriptor>src/main/webapp/WEB-INF/webdefault.xml</defaultsDescriptor>-->
+<!--                    </webAppConfig>-->
+
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.tomcat.maven</groupId>-->
+<!--                <artifactId>tomcat7-maven-plugin</artifactId>-->
+<!--                <version>2.2</version>-->
+<!--                <configuration>-->
+<!--                    <port>${jetty.port}</port>-->
+<!--                    <path>${jetty.context.path}</path>-->
+<!--                    <useTestClasspath>false</useTestClasspath>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
+<!--        </plugins>-->
+
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--            </resource>-->
+<!--        </resources>-->
+<!--        <testResources>-->
+<!--            <testResource>-->
+<!--                <directory>src/test/resources</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--            </testResource>-->
+<!--            &lt;!&ndash; 只为了将webapp目录也被添加进eclipse的源码视图中 &ndash;&gt;-->
+<!--            <testResource>-->
+<!--                <directory>src/main/webapp</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--                <includes>-->
+<!--                    <include>WEB-INF/web*.xml</include>-->
+<!--                </includes>-->
+<!--            </testResource>-->
+<!--        </testResources>-->
+<!--    </build>-->
 
 
 
