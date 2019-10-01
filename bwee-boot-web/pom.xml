@@ -3,10 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <artifactId>bwee-project</artifactId>
+        <groupId>com.cloudo.bwee</groupId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>com.cloudo.bwee</groupId>
     <artifactId>bwee-boot-web</artifactId>
@@ -17,6 +16,24 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
+<!--    <dependencyManagement>-->
+<!--            <dependencies>-->
+<!--                <dependency>-->
+<!--                    <groupId>org.springframework.boot</groupId>-->
+<!--                    <artifactId>spring-boot-dependencies</artifactId>-->
+<!--                    <version>${srping.boot.version}</version>-->
+<!--                    <type>pom</type>-->
+<!--                    <scope>import</scope>-->
+<!--                </dependency>-->
+<!--                <dependency>-->
+<!--                    <groupId>org.apache.dubbo</groupId>-->
+<!--                    <artifactId>dubbo-dependencies-bom</artifactId>-->
+<!--                    <version>${dubbo.version}</version>-->
+<!--                    <type>pom</type>-->
+<!--                    <scope>import</scope>-->
+<!--                </dependency>-->
+<!--            </dependencies>-->
+<!--    </dependencyManagement>-->
 
     <dependencies>
         <dependency>
@@ -27,7 +44,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -40,6 +64,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${srping.boot.version}</version>
             </plugin>
         </plugins>
     </build>

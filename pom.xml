@@ -8,6 +8,7 @@
         <module>bwee-domain</module>
         <module>bwee-app</module>
         <module>bwee-web</module>
+        <module>bwee-boot-web</module>
         <module>bwee-doc</module>
         <module>bwee-app-interface</module>
     </modules>
@@ -125,16 +126,7 @@
                <version>${curator.version}</version>
            </dependency>
 
-           <dependency>
-               <groupId>com.fasterxml.jackson.core</groupId>
-               <artifactId>jackson-core</artifactId>
-               <version>${jackson.version}</version>
-           </dependency>
-           <dependency>
-               <groupId>com.fasterxml.jackson.core</groupId>
-               <artifactId>jackson-databind</artifactId>
-               <version>${jackson.version}</version>
-           </dependency>
+
 
            <!-- 数据库相关 -->
 
@@ -170,12 +162,22 @@
                <artifactId>shiro-web</artifactId>
                <version>${shiro.version}</version>
            </dependency>
-           <!-- -->
-           <dependency>
-               <groupId>javax.validation</groupId>
-               <artifactId>validation-api</artifactId>
-               <version>1.0.0.GA</version>
-           </dependency>
+           <!-- 加入下列包会导致spring-boot-web 无法启动-->
+<!--           <dependency>-->
+<!--               <groupId>javax.validation</groupId>-->
+<!--               <artifactId>validation-api</artifactId>-->
+<!--               <version>1.0.0.GA</version>-->
+<!--           </dependency>-->
+           <!--           <dependency>-->
+           <!--               <groupId>com.fasterxml.jackson.core</groupId>-->
+           <!--               <artifactId>jackson-core</artifactId>-->
+           <!--               <version>${jackson.version}</version>-->
+           <!--           </dependency>-->
+           <!--           <dependency>-->
+           <!--               <groupId>com.fasterxml.jackson.core</groupId>-->
+           <!--               <artifactId>jackson-databind</artifactId>-->
+           <!--               <version>${jackson.version}</version>-->
+           <!--           </dependency>-->
            <dependency>
                <groupId>org.jasypt</groupId>
                <artifactId>jasypt</artifactId>
