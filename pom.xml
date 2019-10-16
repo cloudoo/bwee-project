@@ -11,6 +11,7 @@
         <module>bwee-boot-web</module>
         <module>bwee-doc</module>
         <module>bwee-app-interface</module>
+        <module>bwee-vue-web</module>
     </modules>
     <groupId>com.cloudo.bwee</groupId>
     <artifactId>bwee-project</artifactId>
