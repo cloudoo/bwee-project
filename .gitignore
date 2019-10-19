@@ -2,6 +2,7 @@ target/
 build/
 out/
 .gradle
+
 .idea/
 *.iml
 logs/
@@ -10,3 +11,5 @@ log/
 .settings/
 .project
 .classpath
+.vscode/
+.sts4-cache/
