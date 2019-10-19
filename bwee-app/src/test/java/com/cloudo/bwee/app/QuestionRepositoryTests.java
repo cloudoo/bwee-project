@@ -2,20 +2,21 @@
 
 package com.cloudo.bwee.app;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import com.cloudo.bwee.domain.KnowledgePoint;
 import com.cloudo.bwee.domain.Question;
 import com.cloudo.bwee.repository.QuestionRepository;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -102,7 +103,7 @@ public class QuestionRepositoryTests {
         Assert.assertNotNull(q5.getTopics());
 
         questionRepository.delete(q1);
-        Optional  qq = questionRepository.findById(q1.getId());
+        Optional<Question>  qq = questionRepository.findById(q1.getId());
         Assert.assertNull(qq.get());
     }
 
@@ -113,7 +114,7 @@ public class QuestionRepositoryTests {
         Question q = qo.get();
 
         questionRepository.delete(q);
-        Optional qq = questionRepository.findById(26l);
+        Optional<Question> qq = questionRepository.findById(26l);
         Assert.assertNull(qq.get());
 
     }

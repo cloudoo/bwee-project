@@ -1,9 +1,7 @@
 
-
 package com.cloudo.bwee.app;
 
 import com.cloudo.bwee.domain.User;
-import com.cloudo.bwee.repository.ExamRepository;
 import com.cloudo.bwee.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,30 +29,26 @@ public class UserRepositoryTests {
 
         userRepository.save(user);
 
-        //测试查询
+        // 测试查询
         User u3 = userRepository.findUserByName("clou");
         Assert.assertNull(u3);
         u3 = userRepository.findUserByName("cloudo");
         Assert.assertNotNull(u3);
 
-
         User u1 = userRepository.findById(user.getId()).get();
-        Assert.assertEquals(user.getId(),u1.getId());
-        Assert.assertEquals(user.getName(),u1.getName());
-        Assert.assertEquals(user.getCellphone(),u1.getCellphone());
-        Assert.assertEquals(user.getPassword(),u1.getPassword());
+        Assert.assertEquals(user.getId(), u1.getId());
+        Assert.assertEquals(user.getName(), u1.getName());
+        Assert.assertEquals(user.getCellphone(), u1.getCellphone());
+        Assert.assertEquals(user.getPassword(), u1.getPassword());
 
         u1.setName("雷");
         userRepository.save(u1);
 
-
-
-        User u2 =  userRepository.findById(user.getId()).get();
-        Assert.assertEquals(u2.getName(),"雷");
+        User u2 = userRepository.findById(user.getId()).get();
+        Assert.assertEquals(u2.getName(), "雷");
 
         userRepository.deleteAll();
 
-
     }
-    
+
 }

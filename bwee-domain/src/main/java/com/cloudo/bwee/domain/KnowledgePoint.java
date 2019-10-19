@@ -12,6 +12,11 @@ import java.util.Date;
 @Entity
 public class KnowledgePoint implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -6892576841046582736L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

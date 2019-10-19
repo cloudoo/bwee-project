@@ -4,7 +4,6 @@ package com.cloudo.bwee.app;
 
 import com.cloudo.bwee.domain.ExamTemplate;
 import com.cloudo.bwee.domain.Question;
-import com.cloudo.bwee.repository.ExamRepository;
 import com.cloudo.bwee.repository.ExamTemplateRepository;
 import org.junit.Assert;
 import org.junit.Test;

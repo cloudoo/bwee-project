@@ -4,16 +4,21 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-@Table(name="bw_user")
+@Table(name = "bw_user")
 @Entity
 public class User implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 34939466855634700L;
 
     private Long id;
     private String name;
     private String password;
     private String cellphone;
-    @Column(name="register_tm")
-    private Date registerTm;//注册时间
+    @Column(name = "register_tm")
+    private Date registerTm;// 注册时间
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
