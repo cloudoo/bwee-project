@@ -63,7 +63,7 @@
 
     <!-- 扫描basePackage下所有以@Repository标识的 接口 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="${mapper.scanner.base.package:com.cloudo.bwee.dao}" />
+        <property name="basePackage" value="${mapper.scanner.base.package:com.cloudo.bwee.repository}" />
         <!--<property name="annotationClass" value="com.csair.diamond.repository.annotation.Repository" />-->
         <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" /> -->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />

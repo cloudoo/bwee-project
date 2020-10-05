@@ -2,7 +2,7 @@ package com.cloudo.bwee.test;
 
 
 
-import com.cloudo.bwee.dao.QuestionDao;
+import com.cloudo.bwee.repository.QuestionRepository;
 
 
 import com.cloudo.bwee.domain.Question;
@@ -23,7 +23,7 @@ public class QuestionDaoTest  {
     private static final Logger logger = LoggerFactory.getLogger(QuestionDaoTest.class);
 
     @Autowired
-    private QuestionDao dao;
+    private QuestionRepository dao;
 
     @Test
     public void testCRUD(){
@@ -32,17 +32,17 @@ public class QuestionDaoTest  {
         question.setContent("test");
         question.setErrorCount(1);
         question.setType(Question.SELE_TYPE);
-        int re = dao.insert(question);
+        question = dao.save(question);
 
-        Assert.assertTrue(re>0);
+        Assert.assertTrue(question.getId()>0);
 
-        Question q2 = dao.findById(question.getId());
+        Question q2 = dao.findOne(question.getId());
 
         Assert.assertEquals(question.getContent(),q2.getContent());
 
         dao.delete(question.getId());
 
-        q2 = dao.findById(question.getId());
+        q2 = dao.findOne(question.getId());
 
         Assert.assertNull(q2);
 

@@ -1,10 +1,8 @@
 package com.cloudo.bwee.test;
 
 
-import com.cloudo.bwee.dao.KeyPointDao;
-import com.cloudo.bwee.dao.QuestionDao;
+import com.cloudo.bwee.repository.KeyPointRepository;
 import com.cloudo.bwee.domain.KeyPoint;
-import com.cloudo.bwee.domain.Question;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +21,7 @@ public class KeyPointDaoTest {
     private static final Logger logger = LoggerFactory.getLogger(KeyPointDaoTest.class);
 
     @Autowired
-    private KeyPointDao dao;
+    private KeyPointRepository dao;
 
     @Test
     public void testCRUD(){
@@ -33,23 +31,23 @@ public class KeyPointDaoTest {
         keyPoint.setPageIndex(23);
         keyPoint.setSubject("math");
         keyPoint.setUpTm(new Date());
-        int re = dao.insert(keyPoint);
+        keyPoint = dao.save(keyPoint);
 
-        Assert.assertTrue(re>0);
+        Assert.assertTrue(keyPoint.getId()>0);
 
-        KeyPoint k2 = dao.findById(keyPoint.getId());
+        KeyPoint k2 = dao.findOne(keyPoint.getId());
 
         Assert.assertEquals(keyPoint.getContent(),k2.getContent());
 
         k2.setContent("test");
         k2.setContent("chinese");
 
-        dao.update(k2);
+        dao.save(k2);
 
 
         dao.delete(keyPoint.getId());
 
-        k2 = dao.findById(keyPoint.getId());
+        k2 = dao.findOne(keyPoint.getId());
 
         Assert.assertNull(k2);
 

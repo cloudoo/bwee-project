@@ -1,10 +1,8 @@
 package com.cloudo.bwee.test;
 
 
-import com.cloudo.bwee.dao.ExamDao;
-import com.cloudo.bwee.dao.QuestionDao;
+import com.cloudo.bwee.repository.ExamRepository;
 import com.cloudo.bwee.domain.Exam;
-import com.cloudo.bwee.domain.Question;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,7 +23,7 @@ public class ExamDaoTest {
     private static final Logger logger = LoggerFactory.getLogger(ExamDaoTest.class);
 
     @Autowired
-    private ExamDao dao;
+    private ExamRepository dao;
 
     @Test
     public void testCRUD(){
@@ -35,22 +33,22 @@ public class ExamDaoTest {
         exam.setScore(34.4f);
         exam.setStrDt(new Date());
         exam.setEndDt(new Date());
-        int re = dao.insert(exam);
+        exam = dao.save(exam);
 
-        Assert.assertTrue(re>0);
+        Assert.assertTrue(exam.getId()>0);
 
-        Exam q2 = dao.findById(exam.getId());
+        Exam q2 = dao.findOne(exam.getId());
 
         Assert.assertEquals(exam.getDescription(),q2.getDescription());
 
         dao.delete(exam.getId());
 
-        q2 = dao.findById(exam.getId());
+        q2 = dao.findOne(exam.getId());
 
         Assert.assertNull(q2);
 
 
-        List<Long>  qIds = new ArrayList<>();
+        List<Long>  qIds = new ArrayList();
         qIds.add(12l);
         qIds.add(5l);
         qIds.add(3l);

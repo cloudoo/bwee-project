@@ -1,11 +1,14 @@
 package com.cloudo.bwee.domain;
 
-import com.cloudo.base.domain.BaseDomain;
 
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-public class KeyPoint extends BaseDomain implements Serializable {
+@Entity
+@Table(name = "keypoint")
+public class KeyPoint implements Serializable{
 
     private Long id;
     private String subject;//科目
@@ -13,6 +16,8 @@ public class KeyPoint extends BaseDomain implements Serializable {
     private int pageIndex;//哪一页
     private Date upTm;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }

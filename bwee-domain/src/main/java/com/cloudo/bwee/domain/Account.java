@@ -1,19 +1,26 @@
 package com.cloudo.bwee.domain;
 
-import com.cloudo.base.domain.BaseDomain;
 
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by cloudpj on 2018-12-30.
  */
-public class Account extends BaseDomain {
+@Entity
+@Table(name = "account")
+public class Account implements Serializable {
+
 
     private Long id;
     private String name;
     private String password;
     private Date registerTm;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }

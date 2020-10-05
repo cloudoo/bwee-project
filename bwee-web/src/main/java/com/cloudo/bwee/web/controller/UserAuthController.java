@@ -1,5 +1,6 @@
 package com.cloudo.bwee.web.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,8 +19,7 @@ public class UserAuthController {
 
     @RequestMapping(value = "submit.bw",method = RequestMethod.POST)
     public ModelAndView submit(String username, String password, String testCode, boolean rememberMe, HttpServletRequest request) {
-
-        return new ModelAndView("home");
-
+        return new ModelAndView("redirect:/home/index.bw");
     }
+
 }

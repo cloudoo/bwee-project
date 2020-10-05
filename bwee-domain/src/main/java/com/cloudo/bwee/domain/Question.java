@@ -1,7 +1,8 @@
 package com.cloudo.bwee.domain;
 
-import com.cloudo.base.domain.BaseDomain;
 
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -10,7 +11,10 @@ import java.util.Date;
  * 考试题目
  *
  */
-public class Question extends BaseDomain implements Serializable {
+
+@Entity
+@Table(name = "question")
+public class Question  implements Serializable{
 
     public static int SELE_TYPE= 1;//选择题
     public static int FILL_TYPE= 2;//填空题
@@ -24,6 +28,8 @@ public class Question extends BaseDomain implements Serializable {
     private KeyPoint topic;//所属知识点
     private Date uptm;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }

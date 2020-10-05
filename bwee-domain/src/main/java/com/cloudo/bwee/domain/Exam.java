@@ -1,12 +1,15 @@
 package com.cloudo.bwee.domain;
 
-import com.cloudo.base.domain.BaseDomain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Exam extends BaseDomain implements Serializable{
+
+@Entity
+@Table(name = "exam")
+public class Exam implements Serializable{
 
     private Long id;
     private String description;
@@ -20,6 +23,8 @@ public class Exam extends BaseDomain implements Serializable{
     private float score;
     private Date createTm;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }

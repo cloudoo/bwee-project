@@ -11,11 +11,11 @@
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="admin/css/font.css">
-	<link rel="stylesheet" href="admin/css/xadmin.css">
+    <link rel="stylesheet" href="../admin/css/font.css">
+	<link rel="stylesheet" href="../admin/css/xadmin.css">
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="admin/js/xadmin.js"></script>
+    <script src="../layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../admin/js/xadmin.js"></script>
 
 </head>
 <body>
@@ -41,7 +41,7 @@
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
               <dd><a onclick="x_admin_show('个人信息','http://www.baidu.com')">个人信息</a></dd>
               <dd><a onclick="x_admin_show('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
-              <dd><a href="./login.jsp">退出</a></dd>
+              <dd><a href="login.jsp">退出</a></dd>
             </dl>
           </li>
           <li class="layui-nav-item to-index"><a href="/">前台首页</a></li>
@@ -54,6 +54,21 @@
     <div class="left-nav">
       <div id="side-nav">
         <ul id="nav">
+            <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>知识点管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/order-list.bw">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>知识点</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6b8;</i>

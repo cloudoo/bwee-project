@@ -91,7 +91,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>springMvc</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.bw</url-pattern>
     </servlet-mapping>
 
     <session-config>
