@@ -1,35 +1,40 @@
 package com.cloudo.bwee.domain;
 
-
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 /**
- *
  * 考试题目
- *
  */
-
+@Table(name = "bw_question")
 @Entity
-@Table(name = "question")
-public class Question  implements Serializable{
+public class Question implements Serializable {
 
-    public static int SELE_TYPE= 1;//选择题
-    public static int FILL_TYPE= 2;//填空题
-
-    private Long id;
-    private String content;
-    private int errorCount;//错误次数
-    private int source;//出处，0-   1-   2-
-    private int type;//试题类型
-    private Long topicId;
-    private KeyPoint topic;//所属知识点
-    private Date uptm;
+    public static int SELE_TYPE = 1;//选择题
+    public static int FILL_TYPE = 2;//填空题
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String content;//题目内容
+    private String answer;//答案
+    @Column(name = "error_count")
+    private int errorCount;// 错误次数
+    private int source;// 出处，0- 1- 2-
+    private int type;// 试题类型
+    private int value;// 分值
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "bw_question_kdg", joinColumns = {
+            @JoinColumn(name = "question_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))}, inverseJoinColumns = {
+            @JoinColumn(name = "kdg_id", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT))})
+    private Set<KeyPoint> topics;// 所属知识点
+
+    private Date upTm;
+
     public Long getId() {
         return id;
     }
@@ -44,6 +49,14 @@ public class Question  implements Serializable{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
     public int getErrorCount() {
@@ -70,28 +83,27 @@ public class Question  implements Serializable{
         this.type = type;
     }
 
-    public Long getTopicId() {
-        return topicId;
+    public int getValue() {
+        return value;
     }
 
-    public void setTopicId(Long topicId) {
-        this.topicId = topicId;
+    public void setValue(int value) {
+        this.value = value;
     }
 
-    public KeyPoint getTopic() {
-        return topic;
+    public Set<KeyPoint> getTopics() {
+        return topics;
     }
 
-    public void setTopic(KeyPoint topic) {
-        this.topic = topic;
+    public void setTopics(Set<KeyPoint> topics) {
+        this.topics = topics;
     }
 
-
-    public Date getUptm() {
-        return uptm;
+    public Date getUpTm() {
+        return upTm;
     }
 
-    public void setUptm(Date uptm) {
-        this.uptm = uptm;
+    public void setUpTm(Date upTm) {
+        this.upTm = upTm;
     }
 }

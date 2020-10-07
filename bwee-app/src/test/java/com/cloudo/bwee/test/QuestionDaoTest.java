@@ -36,13 +36,13 @@ public class QuestionDaoTest  {
 
         Assert.assertTrue(question.getId()>0);
 
-        Question q2 = dao.findOne(question.getId());
+        Question q2 = dao.getOne(question.getId());
 
         Assert.assertEquals(question.getContent(),q2.getContent());
 
-        dao.delete(question.getId());
+        dao.deleteById(question.getId());
 
-        q2 = dao.findOne(question.getId());
+        q2 = dao.getOne(question.getId());
 
         Assert.assertNull(q2);
 

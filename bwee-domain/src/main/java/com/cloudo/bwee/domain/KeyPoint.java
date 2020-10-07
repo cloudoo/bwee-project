@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "keypoint")
+@Table(name = "bw_keypoint")
 public class KeyPoint implements Serializable{
 
     private Long id;

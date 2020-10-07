@@ -1,9 +1,16 @@
 package com.cloudo.bwee.repository;
 
-import com.cloudo.bwee.domain.Exam;
 import com.cloudo.bwee.domain.Question;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface QuestionRepository  extends CrudRepository<Question,Long> {
+import java.util.List;
+
+
+public interface QuestionRepository extends JpaRepository<Question,Long> {
+
+
+    List<Question> findByContentContains(String content);
+    List<Question> findByContent(String content);
 
 }

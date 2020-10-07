@@ -1,3 +1,0 @@
-mapper.scanner.base.package=com.cloudo.bwee.dao
-type.aliases.package=com.cloudo.bwee.domain
-#type.handlers.package=com.csair.diamond.repository.mybatis.handler

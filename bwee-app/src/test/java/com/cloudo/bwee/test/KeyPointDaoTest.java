@@ -35,7 +35,7 @@ public class KeyPointDaoTest {
 
         Assert.assertTrue(keyPoint.getId()>0);
 
-        KeyPoint k2 = dao.findOne(keyPoint.getId());
+        KeyPoint k2 = dao.getOne(keyPoint.getId());
 
         Assert.assertEquals(keyPoint.getContent(),k2.getContent());
 
@@ -45,9 +45,9 @@ public class KeyPointDaoTest {
         dao.save(k2);
 
 
-        dao.delete(keyPoint.getId());
+        dao.deleteById(keyPoint.getId());
 
-        k2 = dao.findOne(keyPoint.getId());
+        k2 = dao.getOne(keyPoint.getId());
 
         Assert.assertNull(k2);
 
